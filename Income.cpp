@@ -2,12 +2,11 @@
 Income::Income(double amount, const string& description, Category category, const string& date)
 : Transaction (amount,description,category,date){};
 
-void Income::display() const 
-{
-    cout << "Description: " << getDescription() <<
-    "Amount: £" << getAmount() <<
-    "Category: " << categoryToString <<
-    "Date: " << getDate() << endl;
+void Income::display() const {
+    cout << "Description: " << getDescription() << "\n"
+         << "Amount: £" << getAmount() << "\n"  
+         << "Category: " << categoryToString() << "\n"
+         << "Date: " << getDate() << "\n\n";
 }
 
 string Income::categoryToString() const {

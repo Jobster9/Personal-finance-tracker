@@ -2,12 +2,11 @@
 Expense::Expense(double amount, const string& description, Category category, const string& date)
 : Transaction (amount,description,category,date){};
 
-void Expense::display() const 
-{
-    cout << "Description: " << getDescription() <<
-    "Amount: £" << getAmount() <<
-    "Category: " << categoryToString <<
-    "Date: " << getDate() << endl;
+void Expense::display() const {
+    cout << "Description: " << getDescription() << "\n"
+         << "Amount: £" << getAmount() << "\n"  
+         << "Category: " << categoryToString() << "\n"
+         << "Date: " << getDate() << "\n\n";
 }
 
 string Expense::categoryToString() const {
