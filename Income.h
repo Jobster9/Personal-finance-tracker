@@ -6,10 +6,10 @@
 
 using namespace std;
 
-class Expense : public Transaction 
+class Income : public Transaction 
 {
 public:
-    Expense(double amount, const string& description, Category category, const string& date);
+    Income(double amount, const string& description, Category category, const string& date);
     void display() const override;
 
 private:
