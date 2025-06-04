@@ -5,7 +5,8 @@ void Transaction::displayCompact() const
     string typeStr = (type == TransactionType::EXPENSE) ? "-" : "+";
     string recChar = isRecurring() ? "R" : "O";
 
-    cout << typeStr << "£" << std::fixed << std::setprecision(2) << amount
+    cout << typeStr << "|"
+         << "£" << std::fixed << std::setprecision(2) << amount
          << "|" << description
          << "|" << categoryToString()
          << "|" << dateToString()
@@ -14,10 +15,11 @@ void Transaction::displayCompact() const
 
 void Transaction::displayDetailed() const
 {
-    string typeStr = (type == TransactionType::EXPENSE) ? "EXPENSE" : "INCOME";
+    string typeStr = (type == TransactionType::EXPENSE) ? "EXPENSE" : "INCOME ";
     string recChar = isRecurring() ? "RECURRING" : "ONE-OFF";
 
-    cout << typeStr << "£" << std::fixed << std::setprecision(2) << amount
+    cout << typeStr << "|"
+         << "£" << std::fixed << std::setprecision(2) << amount
          << "|" << description
          << "|" << categoryToString()
          << "|" << dateToString()
@@ -30,7 +32,7 @@ optional<system_clock::time_point> Transaction::getNextOccurrence() const
         return std::nullopt;
 
     auto now = system_clock::now();
-    auto next = calculateNextDate(transactionDate, recurrence->frequency, now);
+    auto next = calculateNextDate(transactionDate, recurrence->frequency);
 
     // Check if we've passed the end date
     if (recurrence->endDate.has_value() && next > recurrence->endDate.value())
@@ -66,7 +68,7 @@ string Transaction::dateToString() const
 #ifdef _WIN32
     localtime_s(&tm_buf, &time_t);
 #else
-    localtime_r(&tm_buf, &time_t);
+    localtime_r(&time_t, &tm_buf);
 #endif
     static constexpr size_t DATE_BUFFER_SIZE = 12;
     char buffer[DATE_BUFFER_SIZE];
@@ -118,8 +120,7 @@ string Transaction::categoryToString() const
     }
 };
 
-system_clock::time_point Transaction::calculateNextDate(const system_clock::time_point &lastDate, Frequency freq,
-                                                        const system_clock::time_point &fromDate) const
+system_clock::time_point Transaction::calculateNextDate(const system_clock::time_point &lastDate, Frequency freq) const
 {
     using namespace std::chrono;
 

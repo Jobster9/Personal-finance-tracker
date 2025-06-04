@@ -85,21 +85,21 @@ class Transaction
 public:
     // One time transactions
     Transaction(double amount, const string &description, const system_clock::time_point &date, IncomeCategory cat)
-        : amount(amount), description(description), transactionDate(date),
-          type(TransactionType::INCOME), incomeCat(cat), recurrence(std::nullopt) {}
+        : amount(amount), description(description), transactionDate(date), type(TransactionType::INCOME),
+          recurrence(std::nullopt), incomeCat(cat) {}
 
     Transaction(double amount, const string &description, const system_clock::time_point &date, ExpenseCategory cat)
-        : amount(amount), description(description), transactionDate(date),
-          type(TransactionType::EXPENSE), expenseCat(cat), recurrence(std::nullopt) {}
+        : amount(amount), description(description), transactionDate(date), type(TransactionType::EXPENSE),
+          recurrence(std::nullopt), expenseCat(cat) {}
 
     // Recurring transactions
     Transaction(double amount, const string &description, IncomeCategory cat, const RecurrenceInfo &recurInfo)
-        : amount(amount), description(description), transactionDate(recurInfo.startDate),
-          type(TransactionType::INCOME), incomeCat(cat), recurrence(recurInfo) {}
+        : amount(amount), description(description), transactionDate(recurInfo.startDate), type(TransactionType::INCOME),
+          recurrence(recurInfo), incomeCat(cat) {}
 
     Transaction(double amount, const string &description, ExpenseCategory cat, const RecurrenceInfo &recurInfo)
-        : amount(amount), description(description), transactionDate(recurInfo.startDate),
-          type(TransactionType::EXPENSE), expenseCat(cat), recurrence(recurInfo) {}
+        : amount(amount), description(description), transactionDate(recurInfo.startDate), type(TransactionType::EXPENSE),
+          recurrence(recurInfo), expenseCat(cat) {}
 
     ~Transaction() = default;
     void displayCompact() const;
@@ -120,20 +120,18 @@ public:
 private:
     double amount;
     string description;
-
     system_clock::time_point transactionDate;
-    optional<RecurrenceInfo> recurrence;
-    string dateToString() const;
-
     TransactionType type;
+    optional<RecurrenceInfo> recurrence;
+
     union
     {
         ExpenseCategory expenseCat;
         IncomeCategory incomeCat;
     };
 
+    string dateToString() const;
     string categoryToString() const;
     string frequencyToString() const;
-    system_clock::time_point calculateNextDate(const system_clock::time_point &lastDate, Frequency freq,
-                                               const system_clock::time_point &fromDate) const;
+    system_clock::time_point calculateNextDate(const system_clock::time_point &lastDate, Frequency freq) const;
 };
