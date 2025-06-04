@@ -1,10 +1,13 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "FinanceManager.h"
+#include "Transaction.h"
 
 using namespace std;
 
-int main() {
-    cout << "Enter the number of strings: ";
+int main()
+{
+    FinanceManager fm = FinanceManager();
     return 0;
 }

@@ -2,18 +2,16 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include "Expense.h"
-#include "Income.h"
+#include "Transaction.h"
 
 using namespace std;
 
-class FinanceManager 
+class FinanceManager
 {
 public:
     FinanceManager();
 
-
 private:
-    vector<Expense> expenses;
-    vector<Income> incomes;
+    vector<Transaction> expenses;
+    vector<Transaction> incomes;
 };
