@@ -19,7 +19,7 @@ public:
     void adjustRate(double newRate) { interestRate = newRate; }
 
 private:
-    double interestRate;
     string name;
     double balance;
+    double interestRate;
 };

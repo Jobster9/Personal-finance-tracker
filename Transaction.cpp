@@ -31,7 +31,7 @@ optional<system_clock::time_point> Transaction::getNextOccurrence() const
     if (!recurrence.has_value())
         return std::nullopt;
 
-    auto now = system_clock::now();
+    // auto now = system_clock::now();
     auto next = calculateNextDate(transactionDate, recurrence->frequency);
 
     // Check if we've passed the end date

@@ -13,10 +13,9 @@ A C++ personal finance management application with google test v1.15.2
 After cloning project input following cmake commands to configure the project.
 
 ```bash
-mkdir build #create build folder
-cd build #route into folder
+mkdir build && cd build # Create & route into build folder
 cmake ..  # Autodetect your c++ compiler, specify if necessary
-
+cmake .. -G "MinGW Makefiles" # My Specified compiler choice for Windows
 ```
 
 ## Build Commands

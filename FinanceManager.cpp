@@ -2,6 +2,8 @@
 #include <stdexcept>
 #include <chrono>
 
+FinanceManager::FinanceManager() {}
+
 void FinanceManager::addTransaction(const Transaction &transaction)
 {
     transactions.push_back(transaction);

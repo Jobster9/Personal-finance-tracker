@@ -15,6 +15,14 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
+# Suppress superficial warnings from Google Test
+if(TARGET gtest)
+    target_compile_options(gtest PRIVATE -Wno-cpp)
+endif()
+if(TARGET gtest_main)
+    target_compile_options(gtest_main PRIVATE -Wno-cpp)
+endif()
+
 # Find all source files except main.cpp
 file(GLOB SOURCES "*.cpp")
 list(REMOVE_ITEM SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp")
