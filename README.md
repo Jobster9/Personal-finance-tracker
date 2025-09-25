@@ -46,7 +46,7 @@ cmake --build . --target tests # Tests only
 
 ./tests.exe --gtest_filter="*Unit*" # Run only unit tests
 ./tests.exe --gtest_filter="*Integration*" # Run only integration tests
-./tests.exe --gtest_filter="Account*" # Example: Run only Account tests
+./tests.exe --gtest_filter="Account*" # Class specific tests, example: Run only Account tests
 ```
 
 ## Development
