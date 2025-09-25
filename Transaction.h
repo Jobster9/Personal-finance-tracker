@@ -85,20 +85,20 @@ class Transaction
 public:
     // One time transactions
     Transaction(double amount, const string &description, const system_clock::time_point &date, IncomeCategory cat)
-        : amount(amount), description(description), transactionDate(date), type(TransactionType::INCOME),
+        : amount(validateAmount(amount)), description(description), transactionDate(date), type(TransactionType::INCOME),
           recurrence(std::nullopt), incomeCat(cat) {}
 
     Transaction(double amount, const string &description, const system_clock::time_point &date, ExpenseCategory cat)
-        : amount(amount), description(description), transactionDate(date), type(TransactionType::EXPENSE),
+        : amount(validateAmount(amount)), description(description), transactionDate(date), type(TransactionType::EXPENSE),
           recurrence(std::nullopt), expenseCat(cat) {}
 
     // Recurring transactions
     Transaction(double amount, const string &description, IncomeCategory cat, const RecurrenceInfo &recurInfo)
-        : amount(amount), description(description), transactionDate(recurInfo.startDate), type(TransactionType::INCOME),
+        : amount(validateAmount(amount)), description(description), transactionDate(recurInfo.startDate), type(TransactionType::INCOME),
           recurrence(recurInfo), incomeCat(cat) {}
 
     Transaction(double amount, const string &description, ExpenseCategory cat, const RecurrenceInfo &recurInfo)
-        : amount(amount), description(description), transactionDate(recurInfo.startDate), type(TransactionType::EXPENSE),
+        : amount(validateAmount(amount)), description(description), transactionDate(recurInfo.startDate), type(TransactionType::EXPENSE),
           recurrence(recurInfo), expenseCat(cat) {}
 
     ~Transaction() = default;
@@ -130,6 +130,7 @@ private:
         IncomeCategory incomeCat;
     };
 
+    static double validateAmount(double amount);
     string dateToString() const;
     string categoryToString() const;
     string frequencyToString() const;
