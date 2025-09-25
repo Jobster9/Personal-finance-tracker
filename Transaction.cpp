@@ -1,5 +1,14 @@
 #include "Transaction.h"
 
+double Transaction::validateAmount(double amount)
+{
+    if (amount < 0.0)
+    {
+        throw std::invalid_argument("Transaction amount cannot be negative. Amount: " + std::to_string(amount));
+    }
+    return amount;
+}
+
 void Transaction::displayCompact() const
 {
     string typeStr = (type == TransactionType::EXPENSE) ? "-" : "+";
